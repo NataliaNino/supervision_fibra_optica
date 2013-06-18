@@ -10,6 +10,7 @@ $port = "5432";
 $dbuser = "postgres";
 $dbpsw = "P0stgr3s";
 $cx = pg_connect("host=$host port=$port dbname=$dbname user=$dbuser password=$dbpsw");	
-
+//echo "CX ok <br>";
 //phpinfo();
+
 ?>

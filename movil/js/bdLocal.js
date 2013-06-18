@@ -9,8 +9,9 @@ function successCB() {
 }
 
 function TBLusuario(tx) {//Si no existe crea la talba USUARIOS
-     tx.executeSql('CREATE TABLE IF NOT EXISTS "usuario" ("id" INTEGER PRIMARY KEY  NOT NULL  DEFAULT (null) ,"nombre" CHAR NOT NULL ,"usuario" CHAR NOT NULL ,"contrasegna" CHAR NOT NULL  DEFAULT (null) ,"activo" CHAR NOT NULL  DEFAULT (1) )');
-     db.transaction(TBLusuarioConsulta, errorCB);
+	tx.executeSql('DELETE TABLE IF EXISTS "usuario"');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS "usuario" ("id" INTEGER PRIMARY KEY  NOT NULL  DEFAULT (null) ,"nombre" CHAR NOT NULL ,"usuario" CHAR NOT NULL ,"contrasegna" CHAR NOT NULL  DEFAULT (null) ,"activo" CHAR NOT NULL  DEFAULT (1) )');
+    db.transaction(TBLusuarioConsulta, errorCB);
 }
 /* LOGUEADO EXITOSAMENTE*/
 function TBLusuarioConsulta(tx) {
@@ -21,7 +22,7 @@ function TBLusuarioConsultaGuarda(tx, results) {
 	var len = results.rows.length;
 	//alert('Resultados: '+len);
     if(len==0){
-		tx.executeSql('INSERT INTO usuario (id,nombre,usuario,contrasegna,activo) values ("9999","Supervisor Movíl","supervisor","123","S")'); 
+		tx.executeSql('INSERT INTO usuario (id,nombre,usuario,contrasegna,activo) values ("9999","Supervisor Movíl","s","1","S")'); 
 	}
 }
 
@@ -29,7 +30,6 @@ function TBLusuarioConsultaGuarda(tx, results) {
 function AlmacenaUsr(tx) {	//
 	db.transaction(TBLusuario, errorCB); //Crea la tabla
 	db.transaction(AlmacenaUsrConsulta, errorCB);			//Consulta Usuario en la bse de datos
-	
 }
 /* LOGUEADO EXITOSAMENTE*/
 function AlmacenaUsrConsulta(tx) {
