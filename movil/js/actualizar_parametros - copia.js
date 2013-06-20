@@ -16,12 +16,12 @@ $(window).load(function () {
 								tablag = i;
 								Vtablag =tablag; 						//alert("Eliminar Tabla: " +tablag);
 								db.transaction(TablaEliminarExe, errorCB);		//TablaEliminar(tablag);					//ELIMINA TABLA EN LA BD
-								var ValTabla="";	//var Ncol = 0;							
-								arr_tabla = new Array();
-						    	for(var j in data[json][i]){ 			//Columna	
-									arr_tabla[j] = [];
+								var ValTabla="";
+								var Ncol = 0;							//var arr_tabla = new Array();
+						    	for(var j in data[json][i]){ 			//Columna	//arr_tabla[j] = [];
 						        	var columnas="";
-						        	var col_valores=""; //Ncol = 0
+						        	var col_valores="";
+									Ncol = 0
 							    	for(var k in data[json][i][j]){ 			//Columna		//alert(k+' '+data[json][i][j][k]);
 							        	if (columnas==""){
 							        		columnas = k;
@@ -29,27 +29,48 @@ $(window).load(function () {
 							        	if (col_valores==""){
 							        		col_valores = '"'+data[json][i][j][k]+'"';
 							        	}else col_valores = col_valores+',"'+data[json][i][j][k]+'"';	//alert(' j:'+j+' Ncol:'+Ncol+' --> Valor: '+data[json][i][j][k]);
+										arr_tabla[j][Ncol] = data[json][i][j][k];
+										Ncol++;
 							    	}
-									if(ValTabla==""){	//CREAR TABLA EN LA BD		//("Crear Tabla: " +tablag);
+									if(ValTabla==""){
+										//("Crear Tabla: " +tablag);
+							    		//TablaCrear(tablag,columnas);					//CREAR TABLA EN LA BD
 							    		Vcolumnas = columnas;
 							    		db.transaction(TablaCrearExe);
 							    		ValTabla = "f";
-							    	}	//alert('J: '+j+'  K: '+Ncol+'-->'+tablag+' '+columnas+' '+col_valores);	//Vcol_valores = col_valores;									//alert(Vcol_valores);
-									//InsertarSQL = InsertarSQL + 'INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+col_valores+'); ';
-									arr_tabla[j] = col_valores;					//alert(InsertarSQL);
-									//alert(arr_tabla[j]);
+							    	}
+									//alert('J: '+j+'  K: '+Ncol+'-->'+tablag+' '+columnas+' '+col_valores);
+									Vcol_valores = col_valores;
+									//alert(Vcol_valores);
+									//db.transaction(TablaGuardarExe);
+									db.transaction(function(tx) {
+										//alert('INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+Vcol_valores+')');
+										//hola();
+										tx.executeSql('INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+Vcol_valores+')', []);
+									});
+									//hola();
+									//TablaGuardar(tablag,columnas,col_valores);
 						    	}
-								arr_filas = j;
-								//alert(arr_filas);
-								//db.transaction(TablaGuardarExe);
-
+								/*Ncol--;
+								alert('J: '+j+'  Ncol: '+Ncol);
+								for(var fil = 0; fil < j+1; fil++) { 
+									var col_val="";
+									for(var col = 0; col < Ncol+1; col++) {
+										alert(arr_tabla[fil][col]);
+										if (col_val==""){
+											col_val = '"'+arr_tabla[fil][col]+'"';
+										}else col_val = col_val+',"'+arr_tabla[fil][col]+'"';
+										alert(col_val);
+									}
+									alert('txxxx');
+									db.transaction(function(tx) {
+										//alert('INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+col_val+')');
+										//hola();
+										tx.executeSql('INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+Vcol_valores+')', []);
+									}); 
+								} */
 							} 
 						}
-						TablaGuardar();
-							//alert('J: '+j);
-							//alert('Cero: '+arr_tabla[0]);
-							//alert('INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+arr_tabla[0]+')');
-							/* */
 				}else{
 					alert("No hay Actualización");
 				}
