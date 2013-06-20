@@ -1,7 +1,7 @@
 var db = window.openDatabase("bdmovil", "1.0", "Proyecto Supervisión Azteca", 200000);
 var Vtablag="";
 var Vcolumnas="";
-var Vcol_valores="";
+//var Vcol_valores="";
 
 function errorCB(err) {
 	// Esto se puede ir a un Log de Error dir�a el purista de la oficina, pero como este es un ejemplo pongo el MessageBox.Show :P
@@ -12,32 +12,38 @@ function successCB() {
     alert("TRANSACION Ok!");
 }
 
-function TablaEliminar(Vtab){
+/*function TablaEliminar(Vtab){
 	Vtablag = Vtab;
 	db.transaction(TablaEliminarExe, errorCB);
-}
+}*/
+
 function TablaEliminarExe(tx){
-	//alert('DROP TABLE IF EXISTS "'+Vtablag+'"');
+	alert('DROP TABLE IF EXISTS "'+Vtablag+'"');
 	tx.executeSql('DROP TABLE IF EXISTS "'+Vtablag+'"');
 }
 
-function TablaCrear(Vtab,Vcol){
-	Vtablag = Vtab;
+ /*function TablaCrear(Vtab,Vcol){
+	Vtablag=Vtab;
 	Vcolumnas=Vcol;
 	db.transaction(TablaCrearExe);
-}
+} */
 function TablaCrearExe(tx){
-	//alert('CREATE TABLE IF NOT EXISTS '+Vtablag+' ('+Vcolumnas+')');
+	alert('CREATE TABLE IF NOT EXISTS '+Vtablag+' ('+Vcolumnas+')');
 	tx.executeSql('CREATE TABLE IF NOT EXISTS '+Vtablag+' ('+Vcolumnas+')');
+	
 }
 
+function hola(){
+	alert('Hola Mundo');
+}
+/*
 function TablaGuardar(Vtab,Vcol,Vval){
 	Vtablag = Vtab;
 	Vcolumnas=Vcol;
 	Vcol_valores=Vval;
 	db.transaction(TablaGuardarExe);
-}
-function TablaGuardarExe(tx){
-	//alert('INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+Vcol_valores+')');
-	tx.executeSql('INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+Vcol_valores+')');
-}
+} */
+/*function TablaGuardarExe(tx){
+	alert('INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+Vcol_valores+')');
+	//tx.executeSql('INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+Vcol_valores+')');
+} */
