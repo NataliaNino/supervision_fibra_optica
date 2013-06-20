@@ -14,19 +14,19 @@ function successCB() {
 }
 
 function TablaEliminarExe(tx){
-	alert('DROP TABLE IF EXISTS "'+Vtablag+'"');
+	//alert('DROP TABLE IF EXISTS "'+Vtablag+'"');
 	tx.executeSql('DROP TABLE IF EXISTS "'+Vtablag+'"');
 }
 
 function TablaCrearExe(tx){
-	alert('CREATE TABLE IF NOT EXISTS '+Vtablag+' ('+Vcolumnas+')');
+	//alert('CREATE TABLE IF NOT EXISTS '+Vtablag+' ('+Vcolumnas+')');
 	tx.executeSql('CREATE TABLE IF NOT EXISTS '+Vtablag+' ('+Vcolumnas+')');
 }
 function TablaGuardar(){
-		db.transaction(function(tx) {
-			arr_filas++;
-			for(var fil = 0; fil < arr_filas; fil++) {
-				tx.executeSql('INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+arr_tabla[fil]+')');
-			}
-		});
+	db.transaction(function(tx) {
+		arr_filas++;
+		for(var fil = 0; fil < arr_filas; fil++) {
+			tx.executeSql('INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+arr_tabla[fil]+')');
+		}
+	});
 }

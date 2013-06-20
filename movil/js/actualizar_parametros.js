@@ -9,9 +9,9 @@ $(window).load(function () {
 			dataType: 'json',
 			success: function(data){
 				if (data[0].encontrado == "true"){
+						$.mobile.showPageLoadingMsg();
 					 	for(var json in data){ 						
-						 	json++; //Omite el registro 'encontrado'
-						 	//alert(json);	//var tablag = "";	//alert("Tabla Limpia: " +tablag);
+						 	json++; //Omite el registro 'encontrado' //alert(json);	//var tablag = "";	//alert("Tabla Limpia: " +tablag);
 						    for(var i in data[json]){ 					//Tabla
 								tablag = i;
 								Vtablag =tablag; 						//alert("Eliminar Tabla: " +tablag);
@@ -34,22 +34,14 @@ $(window).load(function () {
 							    		Vcolumnas = columnas;
 							    		db.transaction(TablaCrearExe);
 							    		ValTabla = "f";
-							    	}	//alert('J: '+j+'  K: '+Ncol+'-->'+tablag+' '+columnas+' '+col_valores);	//Vcol_valores = col_valores;									//alert(Vcol_valores);
-									//InsertarSQL = InsertarSQL + 'INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+col_valores+'); ';
+							    	}	//alert('J: '+j+'  K: '+Ncol+'-->'+tablag+' '+columnas+' '+col_valores);	//Vcol_valores = col_valores;									//alert(Vcol_valores);	//InsertarSQL = InsertarSQL + 'INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+col_valores+'); ';
 									arr_tabla[j] = col_valores;					//alert(InsertarSQL);
-									//alert(arr_tabla[j]);
 						    	}
 								arr_filas = j;
-								//alert(arr_filas);
-								//db.transaction(TablaGuardarExe);
-
 							} 
 						}
 						TablaGuardar();
-							//alert('J: '+j);
-							//alert('Cero: '+arr_tabla[0]);
-							//alert('INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+arr_tabla[0]+')');
-							/* */
+						$.mobile.hidePageLoadingMsg();
 				}else{
 					alert("No hay Actualización");
 				}

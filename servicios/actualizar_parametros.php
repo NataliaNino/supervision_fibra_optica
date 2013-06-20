@@ -37,7 +37,8 @@ $serial ++;
 if ($object->encontrado == "true"){
 	//Trae elementos tabla por tabla
 	$tabla = "eventos_chequeo"; $object = new stdClass();$matriz_val = arreglo_tabla($tabla);$object->$tabla = $matriz_val; $geters[$serial] = $object; $serial ++;
-	//$tabla = "eventos_chequeo"; $object = new stdClass();$matriz_val = arreglo_tabla($tabla);$object->$tabla = $matriz_val; $geters[$serial] = $object; $serial ++;
+	$tabla = "actividades"; $object = new stdClass();$matriz_val = arreglo_tabla($tabla);$object->$tabla = $matriz_val; $geters[$serial] = $object; $serial ++;
+	$tabla = "actividades_hallazgos"; $object = new stdClass();$matriz_val = arreglo_tabla($tabla);$object->$tabla = $matriz_val; $geters[$serial] = $object; $serial ++;
 }
 echo json_encode($geters); 
 ?>
