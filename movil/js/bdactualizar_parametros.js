@@ -1,8 +1,8 @@
 var db = window.openDatabase("bdmovil", "1.0", "Proyecto Supervisión Azteca", 200000);
-var Vtablag="";
 var Vcolumnas="";
 var arr_tabla = new Array();
-var arr_filas=0;
+var arr_ListaTabla = new Array();
+var arr_tablas=0;
 
 function errorCB(err) {
 	// Esto se puede ir a un Log de Error dir�a el purista de la oficina, pero como este es un ejemplo pongo el MessageBox.Show :P
@@ -13,20 +13,14 @@ function successCB() {
     alert("TRANSACION Ok!");
 }
 
-function TablaEliminarExe(tx){
-	//alert('DROP TABLE IF EXISTS "'+Vtablag+'"');
-	tx.executeSql('DROP TABLE IF EXISTS "'+Vtablag+'"');
-}
-
-function TablaCrearExe(tx){
-	//alert('CREATE TABLE IF NOT EXISTS '+Vtablag+' ('+Vcolumnas+')');
-	tx.executeSql('CREATE TABLE IF NOT EXISTS '+Vtablag+' ('+Vcolumnas+')');
-}
 function TablaGuardar(){
-	db.transaction(function(tx) {
-		arr_filas++;
-		for(var fil = 0; fil < arr_filas; fil++) {
-			tx.executeSql('INSERT INTO '+Vtablag+' ('+Vcolumnas+') values ('+arr_tabla[fil]+')');
-		}
+	db.transaction(function(tx) {								//alert("Longitud: "+arr_ListaTabla.length);
+		for(var fil = 0; fil < arr_ListaTabla.length; fil++) {	//alert('Registro: '+fil+': '+arr_ListaTabla[fil]);	//alert('DROP TABLE IF EXISTS '+arr_ListaTabla[fil][0]+';');	//alert('CREATE TABLE IF NOT EXISTS '+arr_ListaTabla[fil][0]+' ('+arr_ListaTabla[fil][1]+')');
+			tx.executeSql('DROP TABLE IF EXISTS '+arr_ListaTabla[fil][0]+';');
+			tx.executeSql('CREATE TABLE IF NOT EXISTS '+arr_ListaTabla[fil][0]+' ('+arr_ListaTabla[fil][1]+')');
+		}	//alert("Longitud: "+arr_tabla.length);
+		for(var fil = 0; fil < arr_tabla.length; fil++) {
+			tx.executeSql('INSERT INTO '+arr_tabla[fil][0]+' ('+arr_tabla[fil][1]+') values ('+arr_tabla[fil][2]+')');
+		} 
 	});
 }

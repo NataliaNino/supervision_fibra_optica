@@ -21,6 +21,7 @@
 	<script src="js/jquery.animate-enhanced.min.js"></script>
 	<script src="js/bdactualizar_parametros.js"></script>
 	<script src="js/actualizar_parametros.js"></script>
+	<script src="js/cargar_tramo_constructor.js"></script>
 	
 	
 </head>
@@ -31,7 +32,17 @@
 	    <option value="2">FUREL</option>
 	    <option value="3">EDEM</option>
 	    <option value="4">GNF</option>
-	</select>
+	</select><br>
+	
+	<select id="miselect">
+		 <option value="1">CentOS</option>
+		 <option value="1">Ubuntu</option>
+		 <option value="2" selected>Fedora</option>
+		 <option value="3">Red Hat</option>
+		 <option value="4">Debian</option>
+	</select><br>
+		
+	
 	<label for="idcar" class="select">Tramo:</label>
 	<br><br>
 <ul id="idcar" name="idcar" data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search cars...">

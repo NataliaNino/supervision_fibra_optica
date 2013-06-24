@@ -8,8 +8,7 @@ function successCB() {
     //alert("Ok!");
 }
 
-function TBLusuario(tx) {//Si no existe crea la talba USUARIOS
-	tx.executeSql('DELETE TABLE IF EXISTS "usuario"');
+function TBLusuario(tx) {//Si no existe crea la talba USUARIOS	//tx.executeSql('DELETE TABLE IF EXISTS "usuario"');
     tx.executeSql('CREATE TABLE IF NOT EXISTS "usuario" ("id" INTEGER PRIMARY KEY  NOT NULL  DEFAULT (null) ,"nombre" CHAR NOT NULL ,"usuario" CHAR NOT NULL ,"contrasegna" CHAR NOT NULL  DEFAULT (null) ,"activo" CHAR NOT NULL  DEFAULT (1) )');
     db.transaction(TBLusuarioConsulta, errorCB);
 }
@@ -56,8 +55,7 @@ function BuscaUsuario(tx) {
 /* LOGUEADO LOCALMENTE EN EL MOVIL*/
 function BuscaUsuarioConsulta(tx) {
 	var usr = $("#login").val();
-	var pas = $("#password").val();
-	//alert('SELECT * FROM usuario  where usuario = "'+usr+'" and contrasegna = "'+pas+'"');
+	var pas = $("#password").val();					//alert('SELECT * FROM usuario  where usuario = "'+usr+'" and contrasegna = "'+pas+'"');
     tx.executeSql('SELECT * FROM usuario  where usuario = "'+usr+'" and contrasegna = "'+pas+'"', [], MuestraItems, errorCB);
 }
 /* LOGUEADO LOCALMENTE EN EL MOVIL*/
