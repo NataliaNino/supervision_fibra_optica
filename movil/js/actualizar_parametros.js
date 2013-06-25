@@ -3,8 +3,9 @@
  * @Fecha 2013-Junio 17
  */
 $(window).load(function () {
+	//probando comentario Natalia 
 		$.ajax({
-			url:'http://localhost:8080/ws/grodco/servicios/actualizar_parametros.php',
+			url:'http://200.21.69.126:8088/supervision_fibra_optica/servicios/actualizar_parametros.php',
 			dataType: 'json',
 			success: function(data){
 				if (data[0].encontrado == "true"){
@@ -55,8 +56,27 @@ $(window).load(function () {
 });
 
 $(document).ready(function(){
+	
 	$("li").click(function () {			//alert("li Click");	
-		  	var str = $(this).val(); 	//var str = $(this.id).text();
-		  	alert (str);
-  		})
+	  	var str = $(this).val(); 	//var str = $(this.id).text();
+	  	alert (str);
+	})
+	
+/*	var refreshId = setInterval( function() 
+    {
+        //alert("3 segundos");
+        //var len = arrItems.length;													//alert(len);
+        $("<option value='1'>juancho</option>").appendTo("#constructor");
+	    //for (var i=0; i<len; i++){
+	    	//$("<option value='1'>juancho</option>").appendTo("#constructor");
+	    	//$("<option value='"+arrItems[i][0]+"'>"+arrItems[i][1]+"</option>").appendTo("#constructor");
+	    	//alert(arrItems[i]);
+	    	//alert(i);	var arr_ListaTabla = new Array();
+	    	//$("<option value='1'>juancho</option>").appendTo("#constructor");
+	    	//$("<option value='1'>juancho</option>").appendTo("#constructor");				//alert(len);
+	    	//alert("<option value='"+results.rows.item(i).id+"'>"+results.rows.item(i).nombre+"</option>");
+	    	//$("<option value='1'>juancho</option>").appendTo("#constructor");
+	    	//$("<option value='"+results.rows.item(i).id+"'>"+results.rows.item(i).nombre+"</option>").appendTo("#constructor");
+	    //} 
+    }, 2000); */
 })

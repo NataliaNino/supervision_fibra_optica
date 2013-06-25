@@ -2,11 +2,14 @@ var db = window.openDatabase("bdmovil", "1.0", "Proyecto Supervisión Azteca", 2
 var Vcolumnas="";
 var arr_tabla = new Array();
 var arr_ListaTabla = new Array();
+var arrItems = new Array();
 var arr_tablas=0;
 
 function errorCB(err) {
 	// Esto se puede ir a un Log de Error dir�a el purista de la oficina, pero como este es un ejemplo pongo el MessageBox.Show :P
-    alert("Error processing SQL: Codigo: " + err.code + " Mensaje: "+err.message);
+	if (err.code != "undefined" && err.message){
+    	alert("Error processing SQL: Codigo: " + err.code + " Mensaje: "+err.message);
+   	}
 }
 
 function successCB() {
