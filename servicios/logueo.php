@@ -1,4 +1,14 @@
-<?php require_once("conexion.php"); ?>
+<?php 
+	/* /header('Content-Type: text/javascript; charset=utf8');
+	
+    header('Access-Control-Allow-Origin: https://localhost:808');
+	"Access-Control-Allow-Origin" : "*"
+    header('Access-Control-Max-Age: 3628800');
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE'); */
+header('Content-type: application/json');
+header('Access-Control-Allow-Origin: *');
+	
+require_once("conexion.php"); ?>
 <?php
 $usuario = $_GET['usr'];
 $clave = $_GET['pas'];
@@ -22,6 +32,6 @@ while ($fila = pg_fetch_assoc($resultado)) {
 	$object = (object)$fila;
 	$geters[] = $object;
 }
-
+//$geters = trim($geters);
 echo json_encode($geters);		//echo print_r($geters);
 ?>

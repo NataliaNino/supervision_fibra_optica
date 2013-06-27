@@ -1,4 +1,7 @@
-<?php include_once("conexion.php"); 
+<?php 
+header('Content-type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
+include_once("conexion.php"); 
 
 function arreglo_tabla($tablap) {
 	global $cx;								//echo $tablap; //$tablap = "eventos_chequeo";
@@ -9,6 +12,7 @@ function arreglo_tabla($tablap) {
 	$total_filas = pg_num_rows($resultado);									//echo "Filas: $total_filas<br>"; //exit;
 	///////////////////////////////////////
 	while ($fila = pg_fetch_assoc($resultado)) {
+		$fila = array_map("utf8", $fila);//echo print_r($fila)."<br><br><br><br>";
 		$object2 = (object)$fila;
 		$arr_fila[$serial2] = $object2;
 		$serial2++;
@@ -40,6 +44,13 @@ if ($object->encontrado == "true"){
 	$tabla = "actividades"; $object = new stdClass();$matriz_val = arreglo_tabla($tabla);$object->$tabla = $matriz_val; $geters[$serial] = $object; $serial ++;
 	$tabla = "actividades_hallazgos"; $object = new stdClass();$matriz_val = arreglo_tabla($tabla);$object->$tabla = $matriz_val; $geters[$serial] = $object; $serial ++;
 	$tabla = "constructores"; $object = new stdClass();$matriz_val = arreglo_tabla($tabla);$object->$tabla = $matriz_val; $geters[$serial] = $object; $serial ++;
+	$tabla = "tramos"; $object = new stdClass();$matriz_val = arreglo_tabla($tabla);$object->$tabla = $matriz_val; $geters[$serial] = $object; $serial ++;
 }
+
+
 echo json_encode($geters); 
+
+function utf8($a) {
+	return htmlentities($a,ENT_QUOTES,'UTF-8');  
+}
 ?>
