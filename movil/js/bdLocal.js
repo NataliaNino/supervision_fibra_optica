@@ -2,17 +2,16 @@ var db = window.openDatabase("bdmovil", "1.0", "Proyecto Supervisión Azteca", 2
 function errorCB(err) {
 	// Esto se puede ir a un Log de Error dir�a el purista de la oficina, pero como este es un ejemplo pongo el MessageBox.Show :P
 	if (err.code != "undefined" && err.message != "undefined"){
-		alert("Error processing SQL: Codigo: " + err.code + " Mensaje: "+err.message);
+		alert("Error procesando SQL: Codigo: " + err.code + " Mensaje: "+err.message);
 	}
 }
-
 function successCB() {
     //alert("Ok!");
 }
 
 function TBLusuario(tx) {//Si no existe crea la talba USUARIOS	//tx.executeSql('DELETE TABLE IF EXISTS "usuario"');
-    tx.executeSql('CREATE TABLE IF NOT EXISTS "usuario" ("id" INTEGER PRIMARY KEY  NOT NULL  DEFAULT (null) ,"nombre" CHAR NOT NULL ,"usuario" CHAR NOT NULL ,"contrasegna" CHAR NOT NULL  DEFAULT (null) ,"activo" CHAR NOT NULL  DEFAULT (1) )');
-    db.transaction(TBLusuarioConsulta, errorCB);
+    tx.executeSql('CREATE TABLE IF NOT EXISTS usuario ("id" INTEGER PRIMARY KEY  NOT NULL  DEFAULT (null) ,"nombre" CHAR NOT NULL ,"usuario" CHAR NOT NULL ,"contrasegna" CHAR NOT NULL  DEFAULT (null) ,"activo" CHAR NOT NULL  DEFAULT (1) )');
+    db.transaction(TBLusuarioConsulta);
 }
 /* LOGUEADO EXITOSAMENTE*/
 function TBLusuarioConsulta(tx) {

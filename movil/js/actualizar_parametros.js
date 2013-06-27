@@ -3,12 +3,12 @@
  * @Fecha 2013-Junio 17
  */
 $(window).load(function () {
+		$.mobile.showPageLoadingMsg();					//alert("show");
 		$.ajax({
 			url:'http://200.21.69.126:8088/supervision_fibra_optica/servicios/actualizar_parametros.php',
 			dataType: 'json',
 			success: function(data){
 				if (data[0].encontrado == "true"){
-						$.mobile.showPageLoadingMsg(); 
 						arr_ListaTabla = new Array();
 						arr_tabla = new Array();
 						var ttal_reg = 0;
@@ -42,26 +42,34 @@ $(window).load(function () {
 							} 
 						}
 						TablaGuardar();
-						$.mobile.hidePageLoadingMsg();
 				}else{
-					alert("No hay Actualización");
+					Cargar_lista(); //alert("No hay Actualización");
 				}
 			},
 			error: function (error) {
-                  alert("No hay conexión en el servidor Principal");
+                  Cargar_lista();	//alert("No hay conexión en el servidor Principal");
             }
 		})
+		//$.mobile.hidePageLoadingMsg();			//alert("hide");
 });
 
 $(document).ready(function(){
-	$("li").click(function () {			//alert("li Click");	
-	  	var str = $(this).val(); 	//var str = $(this.id).text();
-	  	alert (str);
+	$("#btn_ingresar").click(function () {			//alert("li Click");
+		var id_constructor = $("#constructor").val();
+		if (id_constructor == 0){
+			alert("Seleccione el constructor por favor!");
+			$("#btn_ingresar").focus();
+			return;
+		}
+		var id_tramo = $("#tramo").val();
+		if (id_tramo == 0){
+			alert("Seleccione el Tramo por favor!");
+			$("#tramo").focus();
+			return;
+		}		
+		var nom_constructor = $("#constructor option:selected").text();
+		var nom_tramo = $("#tramo option:selected").text();
+		//alert(opcion_seleccionada);
+	
 	})
-/*	var refreshId = setInterval( function() 
-    {
-        //alert("3 segundos");
-        //var len = arrItems.length;													//alert(len);
-        $("<option value='1'>juancho</option>").appendTo("#constructor");
-    }, 2000); */
 })
