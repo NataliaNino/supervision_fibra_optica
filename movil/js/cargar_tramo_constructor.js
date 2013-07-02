@@ -31,3 +31,31 @@ function CargarTramos(tx, results) {
 	$.mobile.hidePageLoadingMsg();
 }
 Cargar_lista();
+
+$(document).ready(function(){
+	$("#btn_ingresar").click(function () {			//alert("li Click");
+		var id_constructor = $("#constructor").val();	//alert("COns: "+id_constructor);
+		if (id_constructor == 0){
+			alert("Seleccione el constructor por favor!");
+			$("#constructor").focus();
+			return;
+		}
+		var id_tramo = $("#tramo").val();
+		if (id_tramo == 0){
+			alert("Seleccione el Tramo por favor!");
+			$("#tramo").focus();
+			return;
+		}		
+		var nom_constructor = $("#constructor option:selected").text();
+		var nom_tramo = $("#tramo option:selected").text();
+		//alert(id_constructor+" "+nom_constructor);
+		//alert(id_tramo+" "+nom_tramo);
+		sessionStorage.setItem("id_tramo", id_tramo);
+		sessionStorage.setItem("nom_tramo", nom_tramo);
+		sessionStorage.setItem("id_constructor", id_constructor);
+		sessionStorage.setItem("nom_constructor", nom_constructor);
+		window.location = "menu_principal.html";
+		//alert(opcion_seleccionada);	//menu_principal.html
+	
+	})
+})

@@ -10,6 +10,7 @@ function successCB() {
 }
 
 function TBLusuario(tx) {//Si no existe crea la talba USUARIOS	//tx.executeSql('DELETE TABLE IF EXISTS "usuario"');
+	
     tx.executeSql('CREATE TABLE IF NOT EXISTS usuario ("id" INTEGER PRIMARY KEY  NOT NULL  DEFAULT (null) ,"nombre" CHAR NOT NULL ,"usuario" CHAR NOT NULL ,"contrasegna" CHAR NOT NULL  DEFAULT (null) ,"activo" CHAR NOT NULL  DEFAULT (1) )');
     db.transaction(TBLusuarioConsulta);
 }
@@ -47,7 +48,7 @@ function AlmacenaUsrConsultaGuarda(tx, results) {
 		var pas = $("#password").val();
 		tx.executeSql('INSERT INTO usuario (id,nombre,usuario,contrasegna,activo) values ("'+id+'","'+nombre+'","'+usr+'","'+pas+'","S")'); 
 	}				//alert('Ingresar');
-	window.location = "constructor_tramo.html";	
+	window.location = "constructor_tramo.html";
 }
 /* LOGUEADO LOCALMENTE EN EL MOVIL*/
 function BuscaUsuario(tx) {

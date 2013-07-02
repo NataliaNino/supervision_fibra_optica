@@ -4,8 +4,9 @@
  */
 $(window).load(function () {
 		$.mobile.showPageLoadingMsg();					//alert("show");
-		$.ajax({
+		$.ajax({					//
 			url:'http://200.21.69.126:8088/supervision_fibra_optica/servicios/actualizar_parametros.php',
+			//url:'http://localhost:808/servicios/actualizar_parametros.php',
 			dataType: 'json',
 			success: function(data){
 				if (data[0].encontrado == "true"){
@@ -52,24 +53,3 @@ $(window).load(function () {
 		})
 		//$.mobile.hidePageLoadingMsg();			//alert("hide");
 });
-
-$(document).ready(function(){
-	$("#btn_ingresar").click(function () {			//alert("li Click");
-		var id_constructor = $("#constructor").val();
-		if (id_constructor == 0){
-			alert("Seleccione el constructor por favor!");
-			$("#btn_ingresar").focus();
-			return;
-		}
-		var id_tramo = $("#tramo").val();
-		if (id_tramo == 0){
-			alert("Seleccione el Tramo por favor!");
-			$("#tramo").focus();
-			return;
-		}		
-		var nom_constructor = $("#constructor option:selected").text();
-		var nom_tramo = $("#tramo option:selected").text();
-		//alert(opcion_seleccionada);
-	
-	})
-})

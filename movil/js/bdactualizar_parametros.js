@@ -18,8 +18,10 @@ function successCB() {
 
 function TablaGuardar(){
 	db.transaction(TablaGuardarExe, errorCB);
+	
 }
 function TablaGuardarExe(tx) {
+	
 	for(var fil = 0; fil < arr_ListaTabla.length; fil++) {							//alert('Registro: '+fil+': '+arr_ListaTabla[fil]);				//alert('DROP TABLE IF EXISTS '+arr_ListaTabla[fil][0]+';');	
 		tx.executeSql('DROP TABLE IF EXISTS '+arr_ListaTabla[fil][0]);				//alert('CREATE TABLE IF NOT EXISTS '+arr_ListaTabla[fil][0]+' ('+arr_ListaTabla[fil][1]+')');
 		tx.executeSql('CREATE TABLE IF NOT EXISTS '+arr_ListaTabla[fil][0]+' ('+arr_ListaTabla[fil][1]+')');
