@@ -16,8 +16,9 @@ function ConsultaMenuCarga(tx, results) {
 	var len = results.rows.length;
 	for (i = 0; i < len; i++){
 		var url = './'+results.rows.item(i).descripcion_etapa+'.html';
-      $("#menu").before('<a class="button medium blue" id="'+results.rows.item(i).id+'">'+results.rows.item(i).descripcion_etapa+'</a>');	//$("#menu").before('<a href="'+url+'" class="button medium blue" id="'+results.rows.item(i).id+'">'+results.rows.item(i).descripcion_etapa+'</a>');
+		$("#menu").before('<a class="button medium blue" id="'+results.rows.item(i).id+'">'+results.rows.item(i).descripcion_etapa+'</a><br>');	//$("#menu").before('<a href="'+url+'" class="button medium blue" id="'+results.rows.item(i).id+'">'+results.rows.item(i).descripcion_etapa+'</a>');
    	}
+   	$("#menu").before('<br><a class="button medium blue" id="s4">Sincronizar</a>');	//$("#menu").before('<a href="'+url+'" class="button medium blue" id="'+results.rows.item(i).id+'">'+results.rows.item(i).descripcion_etapa+'</a>');
 }
 $(document).ready(function(){
 	$("div,a").on("click", "a", function (event) {

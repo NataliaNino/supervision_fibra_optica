@@ -4,6 +4,10 @@
  var nombre_tramo = sessionStorage.getItem("nom_tramo");
  var nombre_constructor = sessionStorage.getItem("nom_constructor");
  var id_actividad = sessionStorage.getItem("id_actividad");
+ var id_tramo = sessionStorage.getItem("id_tramo");
+ var id_constructor = sessionStorage.getItem("id_constructor");
+ var id_usuario = sessionStorage.getItem("id");
+ 
  $("#n_constructor").html("<strong>Constructor: "+nombre_constructor+"</strong>");
  $("#n_tramo").html("<strong>Tramo: "+nombre_tramo+"</strong><br><br><br>");					//$("#menu").html('<a data-role="button" data-theme="a">AFSDFASDF</a>');  //data-icon="arrow-r" data-iconpos="right"//$("#menu").html('<select name="constructor" id="constructor" data-native-menu="true"></select><br>');
 	
@@ -15,30 +19,54 @@ function ConsultaItemsCarga(tx, results) {
 	var len = results.rows.length;	//alert(len);
 	for (i = 0; i < len; i++){
 		var rta = results.rows.item(i).tipo_rta;
-		//alert(rta);
+		var id_item = results.rows.item(i).id_item;
 		if (rta == "SELECCION"){
-			$("#items").append(''+results.rows.item(i).descripcion_item+': <br/><input type="radio" id="radiocu'+i+'" name="radio'+i+'" value="all"><label for="radiocu'+i+'">Cumple</label><input type="radio" id="radionc'+i+'" name="radio'+i+'"value="false"><label for="radionc'+i+'">No cumple</label><input type="radio" id="radiona'+i+'" name="radio'+i+'" value="true"><label for="radiona'+i+'">No Aplica</label><br><label for="observacion'+i+'">Observaci&oacute;n:</label><textarea name="observacion'+i+'" id="observacion'+i+'" width="80%"></textarea><br/><br/>');
+			$("#items").append('<label id="pregunta'+id_item+'">'+results.rows.item(i).descripcion_item+'</label>: <br/><input type="radio" id="radiocu'+i+'" name="'+id_item+'" value="Cumple"><label for="radiocu'+i+'">Cumple</label><input type="radio" id="radionc'+i+'" name="'+id_item+'" value="No cumple"><label for="radionc'+i+'">No cumple</label><input type="radio" id="radiona'+i+'" name="'+id_item+'" value="No Aplica"><label for="radiona'+i+'">No Aplica</label><br><label for="observacion'+id_item+'">Observaci&oacute;n:</label><textarea name="observacion'+id_item+'" id="observacion'+id_item+'" width="80%"></textarea><br/><br/>');
 		}else
 		{
-			$("#items").append(''+results.rows.item(i).descripcion_item+': <br/><label for="Cantidad'+i+'">Cantidad:</label><input type="number" name="Cantidad'+i+'" id="Cantidad'+i+'" width="80%" onkeypress="if (event.keyCode< 48 || event.keyCode > 57) event.returnValue = false;"/><br/><br/>');
-			
+			$("#items").append('<label id="pregunta'+id_item+'">'+results.rows.item(i).descripcion_item+'</label>: <br/><label for="Cantidad'+id_item+'">Cantidad:</label><input type="number" name="'+id_item+'" id="Cantidad'+id_item+'" width="80%" onkeypress="if (event.keyCode< 48 || event.keyCode > 57) event.returnValue = false;"/><br/><br/>');
 		}
    	}
-   	/* $('head').append('<link href="./css/skins/all.css?v=0.9.1" rel="stylesheet">');
-   	$.getScript("./js/jquery.min.js");
-   	$.getScript("./js/jquery.icheck.min.js?v=0.9.1"); */
-   	//alert("hi");
-
 }
 $(document).ready(function(){
-/*	$("div,a").on("click", "a", function (event) {
-    var id_evento = $(this).attr('id');
-    var pagina = $(this).text();
-	sessionStorage.setItem("id_evento", id_evento);
-	window.location = pagina+".html";
-}); */
+	$("#boton").click(function() {
+		var ultimo_id;
+		var validacion = true;
+		//RADIO BUTONS
+		 $('input:radio').each(function () {
+				var $this = $(this),name = $this.attr('name');//alert (name +'---'+ultimo_id) 
+	            if (name != ultimo_id){
+		            var myRadio = $('input[name='+name+']:checked').val();	//alert(myRadio);
+		            if (myRadio === undefined){
+		            	var pregunta = $("#pregunta"+name).text();
+		            	$("#pregunta"+name).focus();
+		            	alert(pregunta+'?');
+		            	validacion = false;
+		            	return false; 
+		            }
+		            ultimo_id = name;
+	            }
+		 });
+		 if(validacion == true){
+			 //CANTIDADES
+	 		 $(':input[type="number"]').each(function () {
+					var $this = $(this),name = $this.attr('name'); //alert (name ) 
+		            var cant_val = $(this).val();	//alert(cant_val);
+		            if (cant_val === undefined || cant_val == "" || cant_val == null){
+		            	var pregunta = $("#pregunta"+name).text();
+		            	alert(pregunta+'?');
+		            	$(this).focus();
+		            	validacion = false;
+		            	return false; 
+		            }
+			 });
+		 }
+		 if(validacion == true){
+			// CARGAR MENU DE LA BASE DE DATOS
+			db.transaction(GuardarItems); 
+		 }	
+	});
 
 })
-
 // CARGAR MENU DE LA BASE DE DATOS
 db.transaction(ConsultaItems); 
